@@ -1,1 +1,1 @@
-# 09MInishell-CoreProject-Wolfsburg42
+# 09Minishell-CoreProject-Wolfsburg42
