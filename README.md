@@ -114,3 +114,6 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 - cat < Makefile | grep gcc > output
 - exit 0 | exit 1
 - exit 1 | exit 0
+
+# Please make sure to do a lexer -> parser -> expander -> executor to make your life easier. Here is a solid start:
+https://harm-smits.github.io/42docs/projects/minishell
