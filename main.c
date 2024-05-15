@@ -6,7 +6,7 @@
 /*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:29:53 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/12 20:57:53 by oruban           ###   ########.fr       */
+/*   Updated: 2024/05/15 09:04:36 by oruban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 #include <readline/readline.h> // readline
 #include <readline/history.h> // add_history
 
+#include <stdlib.h> // EXIT_FAILURE
+
 int main(int argc, char **argv, char **envp)
 {
+	if (argv && argc != 1)
+	{
+		ft_printf("Usage: minishell\n", 2);
+		return (EXIT_FAILURE);
+	}
 	while (*envp)
 	{
 		printf("%s\n", *envp);
