@@ -1,2 +1,7 @@
 a.out
 file
+*.o
+*.a
+minishell
+# libft/*.o
+# libft/*.a

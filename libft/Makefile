@@ -36,12 +36,7 @@ SRCS		:=	ft_isalpha.c			\
 				ft_substr.c				\
 				ft_putnbr_fd.c 			\
 				ft_atol.c				\
-				$(DIR_PRINTF)ft_printf.c\
-				$(DIR_PRINTF)upxx_out.c	\
-				gnl/get_next_line.c		\
-				gnl/get_next_line_utils.c
-				
-SRCS_BONUS	:=	ft_lstnew.c				\
+				ft_lstnew.c				\
 				ft_lstadd_front.c		\
 				ft_lstsize.c			\
 				ft_lstlast.c			\
@@ -49,8 +44,21 @@ SRCS_BONUS	:=	ft_lstnew.c				\
 				ft_lstdelone.c 			\
 				ft_lstclear.c			\
 				ft_lstiter.c			\
-				ft_lstmap.c
-
+				ft_lstmap.c				\
+				$(DIR_PRINTF)ft_printf.c\
+				$(DIR_PRINTF)upxx_out.c	\
+				gnl/get_next_line.c		\
+				gnl/get_next_line_utils.c
+				
+# SRCS_BONUS	:=	ft_lstnew.c				\
+# 				ft_lstadd_front.c		\
+# 				ft_lstsize.c			\
+# 				ft_lstlast.c			\
+# 				ft_lstadd_back.c		\
+# 				ft_lstdelone.c 			\
+# 				ft_lstclear.c			\
+# 				ft_lstiter.c			\
+# 				ft_lstmap.c
 
 OBJS		:=	$(SRCS:.c=.o)
 OBJS_BONUS	:=	$(SRCS_BONUS:.c=.o)
@@ -77,5 +85,5 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+# bonus: $(OBJS_BONUS)
+# 	ar rcs $(NAME) $(OBJS_BONUS)
