@@ -3,97 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 17:05:06 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/28 21:14:09 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/21 17:53:03 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/22 16:56:17 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_itoa
-// Prototype char *ft_itoa(int n);
-// Turn in files -
-// Parameters #1. the integer to convert.
-// Return value The string representing the integer. NULL if the
-// allocation fails.
-// External functs. malloc
-// Description Allocates (with malloc(3)) and returns a string
-// representing the integer received as an argument.
-// Negative numbers must be handled.
-
-// out = ft_memset(out, 'H', nsize); ""is nessessery to initialise the 
-// string out - roi
-
 #include "libft.h"
-#include <limits.h>
 
-static char	*i2a(int n, char *out)
+int	ft_count(int nbr)
 {
-	int	i;
+	int	digit;
 
-	if (0 == n)
-		out[0] = '0';
-	else
+	digit = 0;
+	if (nbr == 0)
+		return (1);
+	if (nbr < 0)
 	{
-		i = ft_strlen(out);
-		while (i > 0)
-		{
-			out[--i] = n % 10 + '0';
-			n = n / 10;
-		}
-		if ('0' == out[0])
-			out[0] = '-';
+		nbr *= -1;
+		digit++;
 	}
-	return (out);
-}
-
-static int	numlen(int n)
-{
-	if (n > 0)
-		return (1 + numlen(n / 10));
-	else
-		return (0);
-}
-// 	// nsize = minus > 0 ? numlen(n) : numlen(n) + 1;
-// out = malloc((nsize + 1) * sizeof(c
-
-static int	find_size(int n)
-{
-	int		nsize;
-
-	if (n < 0)
-		nsize = numlen(-n) + 1;
-	else
+	while (nbr > 0)
 	{
-		if (!n)
-			nsize = 1;
-		else
-			nsize = numlen(n);
+		digit++;
+		nbr /= 10;
 	}
-	return (nsize);
+	return (digit);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*out;
-	int		nsize;
+	char	*str;
+	int		digit;
+	int		nb;
 
-	if (-2147483648 == n)
-	{
-		out = malloc(sizeof("-2147483648"));
-		if (!out)
-			return (NULL);
-		out[ft_strlen("-2147483648")] = '\0';
-		return (ft_memmove(out, "-2147483648", 11));
-	}
-	nsize = find_size (n);
+	str = NULL;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	nb = n;
+	digit = ft_count(nb);
 	if (n < 0)
-		n = -n;
-	out = malloc((nsize + 1) * sizeof(char));
-	if (!out)
-		return (NULL);
-	out = ft_memset(out, 'H', nsize);
-	out[nsize] = '\0';
-	out = i2a(n, out);
-	return (out);
+		nb *= -1;
+	str = malloc((digit + 1) * sizeof(char));
+	if (str == NULL)
+		return (0);
+	str[digit] = '\0';
+	while (digit > 0)
+	{
+		str[digit - 1] = (nb % 10) + 48;
+		nb /= 10;
+		digit--;
+	}
+	if (n < 0)
+		str[digit] = '-';
+	return (str);
 }
+
+// int	main(void)
+// {
+// 	int num1 = 12345;
+// 	int num2 = -6789;
+// 	int num3 = 0;
+// 	int num4 = -2147483648;
+
+// 	char *str1 = ft_itoa(num1);
+// 	char *str2 = ft_itoa(num2);
+// 	char *str3 = ft_itoa(num3);
+// 	char *str4 = ft_itoa(num4);
+
+// 	printf("Number: %d, String: %s\n", num1, str1);
+// 	printf("Number: %d, String: %s\n", num2, str2);
+// 	printf("Number: %d, String: %s\n", num3, str3);
+// 	printf("Number: %d, String: %s\n", num4, str4);
+
+// 	free(str1);
+// 	free(str2);
+// 	free(str3);
+// 	free(str4);
+
+// 	return 0;
+// }

@@ -3,57 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 17:17:09 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/29 14:53:49 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/15 11:40:40 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/12/01 14:13:41 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// NAME
-// 	   memmove - copy memory area
-// SYNOPSIS
-// 	   #include <string.h>
-// 	   void *memmove(void *dest, const void *src, size_t n);
-// DESCRIPTION
-// 	   The  memmove() function copies n bytes from memory area src to memory 
-// 		area dest.  The memory areas may overlap: copying takes place as
-// 	   though the bytes in src are first copied into a temporary array that
-// 		 does not overlap src or dest, and the bytes are then copied  from
-// 	   the temporary array to dest.
-// RETURN VALUE
-// 	   The memmove() function returns a pointer to dest.
-
-// Implementation: 
-// roi: Memory efficient code. Checking first if the arraies are overlapping. 
-// If so copying to dest via a src-copy array if not direct copying from src.
-
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	unsigned char		*s;
-	unsigned char		*d;
-	size_t				i;
+	size_t	i;
+	char	*s;
+	char	*d;
 
-	s = (unsigned char *) src;
-	d = (unsigned char *) dest;
+	s = (char *)src;
+	d = (char *)dest;
+	if (!s && !d)
+		return (NULL);
 	i = 0;
-	if (dest < src && n)
+	if (d >= s)
 	{
-		while (i < n)
+		while (len-- > 0)
+			d[len] = s[len];
+	}
+	else
+	{
+		while (i < len)
 		{
 			d[i] = s[i];
 			i++;
 		}
 	}
-	if (dest > src && n)
-	{
-		while (n > 0)
-		{
-			n--;
-			d[n] = s[n];
-		}
-	}
 	return (dest);
 }
+
+// int	main()
+// {
+// 	char	dest[] = "Benan";
+// 	const char	src[] = "Memo";
+
+// 	printf("Before memmove dest = %s, src = %s\n", dest, src);
+// 	printf("After memmove dest = %s\n", ft_memmove(dest, src, 3));
+// 	return(0);
+// }

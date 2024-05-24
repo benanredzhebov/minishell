@@ -3,26 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 17:19:17 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/13 18:00:11 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/21 18:07:14 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/22 14:01:13 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Function name ft_putstr_fd
-// Prototype void ft_putstr_fd(char *s, int fd);
-// Turn in files -
-// Parameters #1. The string to output.
-// #2. The file descriptor on which to write.
-// Return value None
-// External functs. write
-// Description Outputs the string ’s’ to the given file
-// descriptor.
 
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, s, ft_strlen(s));
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
 }
+
+// int	main(void)
+// {
+// 	char	s[] = "Benan";
+// 	int		fd = 1;
+// 	ft_putstr_fd(s, fd);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:30:58 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/16 10:54:16 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:33:51 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	print_error(void)
 {
 	ft_putstr_fd("You forgot to close some quotes\n", STDERR_FILENO);
+	return (1);
 }
 
 int	has_unclosed_quotes(char *str)

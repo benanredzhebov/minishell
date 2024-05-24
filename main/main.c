@@ -3,30 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:29:53 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/15 17:33:17 by oruban           ###   ########.fr       */
+/*   Updated: 2024/05/23 12:03:27 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char *argv[], char *envp[]) 
 {
-	if (argv && argc != 1)
-	{
-		ft_printf("Usage: minishell\n", 2);
-		return (EXIT_FAILURE);
-	}
-	return(minishell(ini_minienv(envp)));
-
-}
-
-int minishell(t_env *minienv)
-{
-	int exit_status;
+	t_data	*data;
+	char	**env;
 	
-	exit_status = EXIT_SUCCESS;
-	return (exit_status);
+	(void)argc;
+	(void)argv;
+	(void)envp; // I will initialize it later
+	
+	data = NULL;
+	env = NULL;
+	
+	init_data((&data), envp);
+	minish_loop(data);
+	return (0);
 }
+
+// int	main()
+// {
+// 	char	*input;
+
+// 	while (1)
+// 	{
+// 		input = readline("minishell$ ");
+// 		if (!input)
+// 			break;
+// 		if (*input)
+// 			add_history(input);
+// 		printf("Input: %s\n", input);
+// 		free(input);
+// 	}
+// 	return 0;
+// }

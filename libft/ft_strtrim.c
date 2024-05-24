@@ -3,88 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:14:24 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/28 21:11:26 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/17 16:44:57 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/25 23:16:56 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_strtrim
-// Prototype char *ft_strtrim(char const *s1, char const *set);
-// Turn in files -
-// Parameters #1. The string to be trimmed.
-// #2. The reference set of characters to trim.
-// Return value The trimmed string. NULL if the allocation fails.
-// External functs. malloc
-// Description Allocates (with malloc(3)) and returns a copy of
-// ’s1’ with the characters specified in ’set’ removed
-// from the beginning and the end of the string.
-
 #include "libft.h"
 
-static size_t	trmdstart(char const *s1, char const *set)
+static int	ft_check(char c, char const *set)
 {
-	size_t	i;
-	size_t	start_i;
+	int	i;
 
-	start_i = 0;
 	i = 0;
-	while (i <= ft_strlen(set))
+	while (set[i] != '\0')
 	{
+		if (set[i] == c)
+			return (0);
 		i++;
-		if (set[i - 1] == s1[start_i] && start_i < ft_strlen(s1))
-		{
-			start_i++;
-			i = 0;
-		}
 	}
-	return (start_i);
-}
-
-static size_t	trmdfinish(char const *s1, char const *set, size_t start_i)
-{
-	size_t	i;
-	size_t	finish_i;
-
-	finish_i = ft_strlen(s1) - 1;
-	i = 0;
-	while (i <= ft_strlen(set))
-	{
-		i++;
-		if (set[i - 1] == s1[finish_i] && finish_i > start_i)
-		{
-			finish_i--;
-			i = 0;
-		}
-	}
-	return (finish_i);
+	return (1);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start_i;
-	size_t	finish_i;
-	char	*out;
+	size_t	start;
+	size_t	end;
+	size_t	i;
+	char	*str;
 
-	start_i = trmdstart(s1, set);
-	if (start_i < ft_strlen(s1))
+	if (!s1)
+		return (NULL);
+	start = 0;
+	end = ft_strlen(s1);
+	while ((ft_check(s1[start], set) == 0) && (s1[start] != '\0'))
+		start++;
+	while ((ft_check(s1[end - 1], set) == 0) && (end > start))
+		end--;
+	str = malloc(sizeof(char) * (end - start + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (start < end)
 	{
-		finish_i = trmdfinish(s1, set, start_i);
-		out = ft_calloc(1, finish_i - start_i + 1 + 1);
-		if (!out)
-			return (NULL);
-		out[finish_i - start_i + 1] = 0;
+		str[i] = s1[start];
+		i++;
+		start++;
 	}
-	else
-	{
-		finish_i = start_i;
-		out = ft_calloc(1, 1);
-		if (!out)
-			return (NULL);
-		out[0] = 0;
-	}
-	if (out != NULL)
-		out = (char *) ft_memmove(out, s1 + start_i, finish_i - start_i + 1);
-	return (out);
+	str[i] = '\0';
+	return (str);
 }
+
+// int	main(void)
+// {
+// 	char	s1[] = "  Hello!   ";
+// 	char	set[] = " ";
+
+// 	char *trimmed = ft_strtrim(s1, set);
+// 	if (trimmed != NULL)
+// 	{
+// 		printf("Original string: \"%s\"\n", s1);
+// 		printf("Trimmed string: \"%s\"\n", trimmed);
+// 		free(trimmed);
+// 	}
+// 	else
+// 		printf("Memory allocation error in ft_strtrim\n");
+// 	return (0);
+// }

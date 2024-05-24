@@ -3,27 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:13:47 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/13 16:13:47 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/14 13:14:14 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/14 13:52:43 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// isalnum()  #include <ctype.h>
-// checks for an alphanumeric character; it is equivalent to (isalpha(c) || 
-// isdigit(c)).
-// RETURN VALUE The values returned are nonzero if the character c falls into 
-// the tested class, and zero if not.
-
-// return (((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || 
-// (c >= '0' && c <= '9')) ? 1 : 0);
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	if (c >= '0' && c <= '9')
+	if ((ft_isalpha(c)) || (ft_isdigit(c)))
 		return (1);
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	char	c;
+// 	char	result;
+
+// 	c = '*';
+// 	result = ft_isalnum(c);
+// 	printf("The character is not alphanumeric: %d\n", result);
+
+// 	c = 'g';
+// 	result = ft_isalnum(c);
+// 	printf("The character is alphanumeric %d\n", result);
+
+// 	c = '+';
+// 	result = ft_isalnum(c);
+// 	printf("The character is not alphanumeric: %d\n", result);
+
+// 	c = '6';
+// 	result = ft_isalnum(c);
+// 	printf("The character is alphanumeric: %d\n", result);
+
+// 	return (0);
+// }
