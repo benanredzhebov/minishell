@@ -6,7 +6,7 @@
 #    By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 08:50:20 by beredzhe          #+#    #+#              #
-#    Updated: 2024/05/21 12:32:21 by beredzhe         ###   ########.fr        #
+#    Updated: 2024/05/25 15:25:12 by beredzhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,19 +69,19 @@ B_OBJ 	=	$(BONUS:.c=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	ar -crs $(NAME)	$(OBJ)
+	@ar -crs $(NAME)	$(OBJ)
 
 bonus:		$(B_OBJ)
-	ar -crs $(NAME)	$(B_OBJ)
+	@ar -crs $(NAME)	$(B_OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ)	$(B_OBJ)
+	@rm -rf $(OBJ)	$(B_OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean allx§
 

@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:29:53 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/23 12:03:27 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/25 14:12:10 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char *argv[], char *envp[])
 	env = NULL;
 	
 	init_data((&data), envp);
-	minish_loop(data);
+	minishell_loop(data);
+	
 	return (0);
 }
 

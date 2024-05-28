@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minish_loop.c                                      :+:      :+:    :+:   */
+/*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:55:18 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/24 10:27:29 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:53:12 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	minish_loop(t_data *data)
+void	minishell_loop(t_data *data)
 {
 	char	*input;
 	
 	while (1)
 	{
-		// 1.Here have to write function to reset
-		/*to avoid segmentation fault. Delete later*/
+		/* 1.Here have to write function to reset */
+		/*2.to avoid segmentation fault. Delete later*/
 		if (data == NULL)
 		{
 			fprintf(stderr, "Error: data is NULL\n");
@@ -37,7 +37,13 @@ void	minish_loop(t_data *data)
 			add_history(input);
 		if (has_unclosed_quotes(input))
 			continue;
-		printf("Input: %s\n", input);
+		data->input_line = trim_input(input);
+		ft_memdel((void *)&input);
+		if (special_chars(data->input_line))
+			|| (lexical_analysis(data, data->input_line)))
+			continue;
+		printf("Input: %s\n", data->input_line); //working trim
+		printf("Input: %s\n", input); //standart trim. I free it already
 		free(input);
 	}
 }
