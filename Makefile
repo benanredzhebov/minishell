@@ -6,7 +6,7 @@
 #    By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 15:10:17 by beredzhe          #+#    #+#              #
-#    Updated: 2024/05/25 16:03:52 by beredzhe         ###   ########.fr        #
+#    Updated: 2024/05/29 15:04:54 by beredzhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME	=	minishell
 # List all source files
 SRCS	=	$(wildcard src/main/*.c) \
 			$(wildcard src/tokenization/*.c) \
-			$(wildcard src/utils/*.c)
+			$(wildcard src/utils/*.c) \
+			$(wildcard src/lexer/*.c) \
+			$(wildcard src/expand/*c)
 
 # Generate object files names
 OBJ_DIR	=	obj

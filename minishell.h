@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:54 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/28 14:44:15 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:51:12 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,9 @@ typedef struct s_data
 
 }				t_data;
 
-typedef struct s_token
-{
-	t_token_type	type;
-	char			*value;
-	struct s_env	*next;
-	struct s_env	*prev;
-}				t_token;
-
 typedef enum e_token_type
 {
-	WORD = 1,
+	T_WORD = 1,
 	T_NEWLINE, /*\n*/
 	T_SPACE, /*' '*/
 	T_DOLLAR, /*$*/
@@ -65,6 +57,14 @@ typedef enum e_token_type
 	T_DELIMITER,
 	T_PARENTHESES
 }				t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*word;
+	struct s_env	*next;
+	struct s_env	*prev;
+}				t_token;
 
 typedef struct s_env
 {
@@ -105,8 +105,25 @@ int		in_quotes(char *s, int pos);
 /*str_checkers.c*/
 char	*trim_input(char *input);
 void	process_input(char *input, char *str, int *i, int *j);
+int	ft_char_in_string(char c, char *str);
 
 /*character_checkers.c*/
 int		special_chars(char *str);
+
+/*lexical_analysis.c*/
+int	lexical_analysis(t_data *data, char *input);
+
+/*lexical_analysis2.c*/
+void	tokenise(t_data *data, char *str);
+
+/*token_list_utils.c*/
+void	add_token(t_token **head, t_token *new);
+
+/*tokenising.c*/
+t_token	*create_token(t_data *data, int i);
+t_token	*create_arg_token(t_data *data, char *word, enum e_token_type type);
+
+/*quotes_utils.c*/
+int	is_escaped(char *s, int pos);
 
 #endif

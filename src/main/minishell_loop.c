@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:55:18 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/28 14:53:12 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:01:07 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	minishell_loop(t_data *data)
 			continue;
 		data->input_line = trim_input(input);
 		ft_memdel((void *)&input);
-		if (special_chars(data->input_line))
+		if ((special_chars(data->input_line))
 			|| (lexical_analysis(data, data->input_line)))
 			continue;
 		printf("Input: %s\n", data->input_line); //working trim

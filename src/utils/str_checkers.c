@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:20:32 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/28 15:10:14 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:02:10 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_is_in_str(char c, char *str)
 /*checks is a character is present in a string*/
 int	ft_char_in_string(char c, char *str)
 {
-	if (ft_is_in_str(str, c) >= 0)
+	if (ft_is_in_str(c, str) >= 0)
 		return (1);
 	return (0);
 }

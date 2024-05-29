@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr_len.c                                          :+:      :+:    :+:   */
+/*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 11:02:45 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/16 11:04:56 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/05/29 13:28:39 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/05/29 14:46:24 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	arr_len(char **arr)
+/*checks if character is \*/
+int	is_escaped(char *s, int pos)
 {
-	int	len;
+	int	n;
 
-	len = 0;
-	while (*arr)
+	n = 0;
+	while (pos >= 0 && s[pos] == '\\')
 	{
-		len++;
-		arr++;
+		n++;
+		pos--;
 	}
-	return (len);
+	return (n % 2);
 }
