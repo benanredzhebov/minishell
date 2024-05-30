@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:54 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/29 14:51:12 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:14:38 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data
 	int				count; /*count the number of tokens*/
 
 	char			*input_minishell; /*initial input to the shell*/
-	char			**root_directory;
+	char			**root_directory; /*while be used later for parcing part*/
 	char			*input_line; /*input after being processed*/
 
 }				t_data;
@@ -58,14 +58,6 @@ typedef enum e_token_type
 	T_PARENTHESES
 }				t_token_type;
 
-typedef struct s_token
-{
-	t_token_type	type;
-	char			*word;
-	struct s_env	*next;
-	struct s_env	*prev;
-}				t_token;
-
 typedef struct s_env
 {
 	char			*var_name;
@@ -74,6 +66,14 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }				t_env;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*word;
+	struct s_token	*next;
+	struct s_token	*prev;
+}				t_token;
 
 /*Loop into the minishell program*/
 void	minishell_loop(t_data *data);
@@ -125,5 +125,9 @@ t_token	*create_arg_token(t_data *data, char *word, enum e_token_type type);
 
 /*quotes_utils.c*/
 int	is_escaped(char *s, int pos);
+
+/*find_token.c*/
+int	find_token(t_data *data, char *str, int *i, t_token **head);
+int	find_token2(int i, char *str, char *split);
 
 #endif

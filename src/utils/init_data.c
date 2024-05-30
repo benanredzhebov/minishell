@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:36:01 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/25 14:14:30 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/30 09:29:44 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	init_data(t_data **data, char **envp)
 	if (!*data)
 		exit(EXIT_FAILURE);
 	(*data)->input_line = NULL;
+	(*data)->root_directory = NULL;
 	(*data)->input_minishell = "minishell>> ";
 }
