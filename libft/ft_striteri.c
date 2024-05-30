@@ -3,34 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 17:23:53 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/22 18:14:36 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/21 18:15:04 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/24 15:09:00 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_striteri
-// Prototype void ft_striteri(char *s, void (*f)(unsigned int, char*));
-// Turn in files -
-// Parameters #1. The string on which to iterate.
-// #2. The function to apply to each character.
-// Return value None.
-// External functs. None
-// Description Applies the function f to each character of the
-// string passed as argument, and passing its index
-// as first argument. Each character is passed by
-// address to f to be modified if necessary
-// "Tell me why!" : f(i, &s[i]);
+#include "libft.h"
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	int	i;
 
+	if (!s)
+		return ;
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
 		f(i, &s[i]);
 		i++;
 	}
 }
+
+// void print_index_char(unsigned int index, char *character)
+// {
+//     printf("Index: %u, Character: %c\n", index, *character);
+// }
+
+// int main(void)
+// {
+// 	char str[] = "Benan";
+
+// 	printf("Original string: %s\n", str);
+
+// 	printf("Applying ft_striteri:\n");
+
+// 	ft_striteri(str, &print_index_char);
+
+// 	return 0;
+// }

@@ -3,49 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 17:26:37 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/15 15:29:07 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/17 10:42:12 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/17 16:44:09 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Function name ft_strjoin
-// Prototype char *ft_strjoin(char const *s1, char const *s2);
-// Turn in files -
-// Parameters #1. The prefix string.
-// #2. The suffix string.
-// Return value The new string. NULL if the allocation fails.
-// External functs. malloc
-// Description Allocates (with malloc(3)) and returns a new
-// string, which is the result of the concatenation
-// of ’s1’ and ’s2’.
 
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*out;
-	size_t	i;
-	size_t	j;
+	char	*newstr;
+	size_t	counter;
+	size_t	sec_counter;
+	size_t	size;
 
-	out = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (out != NULL)
+	if (!s1 && !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	newstr = malloc(sizeof(char) * size);
+	if (newstr == 0)
+		return (NULL);
+	counter = 0;
+	while (s1[counter] != '\0')
 	{
-		i = 0;
-		while (i < ft_strlen(s1))
-		{
-			out[i] = s1[i];
-			i++;
-		}
-		j = 0;
-		while (j < ft_strlen(s2))
-		{
-			out[i] = s2[j];
-			i++;
-			j++;
-		}
-		out[i] = '\0';
+		newstr[counter] = s1[counter];
+		counter++;
 	}
-	return (out);
+	sec_counter = 0;
+	while (s2[sec_counter] != '\0')
+	{
+		newstr[counter + sec_counter] = s2[sec_counter];
+		sec_counter++;
+	}
+	newstr[counter + sec_counter] = '\0';
+	return (newstr);
 }
+
+// int	main(void)
+// {
+// 	char	s1[] = "Dorukhan";
+// 	char	s2[] = "Defne";
+// 	char	*newstr;
+
+// 	newstr = ft_strjoin(s1, s2);
+// 	printf("The new string is: %s\n", newstr);
+// 	return (0);
+// }

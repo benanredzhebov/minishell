@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 17:33:43 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/15 17:37:52 by oruban           ###   ########.fr       */
+/*   Created: 2024/05/21 12:26:58 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/05/21 12:29:42 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-t_env *ini_minienv(envp)
+#include "libft.h"
+
+void	ft_memdel(void **ap)
 {
-    t_env *list;
-    
-    list = NULL;
-    return (list);
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
 }

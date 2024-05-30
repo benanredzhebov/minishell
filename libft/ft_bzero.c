@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:06:08 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/13 17:46:55 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/14 09:30:24 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/23 15:41:38 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// SYNOPSIS
-// 	   #include <strings.h>
-// 	   void bzero(void *s, size_t n);
-// DESCRIPTION
-// 	   The  bzero()  function  erases the data in the n bytes of the memory 
-// 	   starting at the location pointed to by s, by writing zeros (bytes
-// 	   containing '\0') to that area.
-// RETURN VALUE
-// 	   None.
-
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *dest, size_t n)
 {
-	unsigned char	*pntr;
-	size_t			i;
+	size_t	i;
 
-	pntr = s;
 	i = 0;
 	while (i < n)
 	{
-		pntr[i] = '\0';
+		*(unsigned char *)(dest + i) = 0;
 		i++;
 	}
 }
+
+// int	main()
+// {
+// 	char buffer[5] = "Benan";
+
+// 	printf("Text before ft_bzero: %s\n", buffer);
+
+// 	ft_bzero(buffer, 5);
+// 	printf("Text after ft_bzero: %s\n", buffer);
+// 	return 0;
+// }

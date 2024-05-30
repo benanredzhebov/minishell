@@ -1,50 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 17:19:22 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/29 20:39:24 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/26 15:30:38 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/27 09:12:59 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_lstclear
-// Prototype void ft_lstclear(t_list **lst, void (*del)(void*));
-// Turn in files -
-// Parameters
-// 	lst: The address of a pointer to a node.
-// 	del: The address of the function used to deletethe content of the node.
-// Return value None
-// External functs. free
-// Description Deletes and frees the given node and every
-// successor of that node, using the function ’del’ and free(3).
-// Finally, the pointer to the list must be set to NULL.
-
 #include "libft.h"
-
-// #include <unistd.h>
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }				t_list;
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*node_to_clear;
+	t_list	*t;
+	t_list	*tmp;
 
-	while (*lst)
+	t = *lst;
+	while (t)
 	{
-		if (!del || !*lst)
-			return ;
-		while (*lst)
-		{
-			node_to_clear = *lst;
-			del((*lst)->content);
-			*lst = (*lst)->next;
-			free(node_to_clear);
-		}
+		tmp = t->next;
+		ft_lstdelone(t, del);
+		t = tmp;
 	}
+	*lst = NULL;
 }
