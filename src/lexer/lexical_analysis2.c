@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_analysis2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:38:40 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/30 09:40:54 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:52:34 by oruban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	tokenise(t_data *data, char *str)
 	data->count = 0;
 	while (str[i])
 	{
-		printf("Position: %d, Charachter: %c\n", i, str[i]);
+		// printf("Position: %d, Charachter: %c\n", i, str[i]);
 		if (!find_token(data, str, &i, head))
 			continue;
 		data->count++;
@@ -35,6 +35,6 @@ void	tokenise(t_data *data, char *str)
 	{
 		add_token(head, create_token(data, i));
 		add_token(head, create_arg_token(data, "newline", T_NEWLINE));
-		printf("data->count: %d\n", data->count);
+		// printf("data->count: %d\n", data->count);
 	}
 }

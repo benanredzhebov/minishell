@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenising.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:18:57 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/29 12:01:48 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:52:24 by oruban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_token	*create_token(t_data *data, int i)
 	new->type = T_WORD;
 	data->count = 0;
 	return (new);
+	printf("new->word: %s\n", new->word);
 }
 
 /*creates new token based on the provided word and type*/
@@ -37,4 +38,5 @@ t_token	*create_arg_token(t_data *data, char *word, enum e_token_type type)
 	new->word = ft_strdup(word);
 	new->type = type;
 	return (new);
+	printf("new->wordarg_tok: %s\n", new->word);
 }

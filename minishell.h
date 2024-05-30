@@ -6,7 +6,7 @@
 /*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:54 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/30 18:35:17 by oruban           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:53:38 by oruban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,8 @@ int	is_escaped(char *s, int pos);
 /*find_token.c*/
 int	find_token(t_data *data, char *str, int *i, t_token **head);
 int	find_token2(int i, char *str, char *split);
+
+/*parenthesis_utils2.c*/
+void	set_token_parenth2(t_token *token);
 
 #endif
