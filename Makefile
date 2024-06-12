@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oruban <oruban@student.42.fr>              +#+  +:+       +#+         #
+#    By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 15:10:17 by beredzhe          #+#    #+#              #
-#    Updated: 2024/05/30 20:55:40 by oruban           ###   ########.fr        #
+#    Updated: 2024/06/05 12:56:48 by beredzhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ SRCS	=	$(wildcard src/main/*.c) \
 			$(wildcard src/tokenization/*.c) \
 			$(wildcard src/utils/*.c) \
 			$(wildcard src/lexer/*.c) \
-			$(wildcard src/expand/*c)
+			$(wildcard src/expand/*.c) \
+			$(wildcard src/parenthesis/*.c) \
+			$(wildcard src/execution/*.c) \
+			
 
 # Generate object files names
 OBJ_DIR	=	obj
@@ -28,14 +31,10 @@ CFLAGS	=	-Wall -Wextra -Werror
 LDLIBS	=	-lreadline -lft # This tells the linker to link the Readline library with your program
 LDFLAGS	+=	-L./libft
 
-
-# Generate object files names
-OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-
 LIBFT_A	=	libft/libft.a
 HEADER	=	$(wildcard *.h)
-VPATH	=	src/main:src/tokenization:src/utils
-INCLUDE	=	-I ./ -I ./includes
+VPATH	=	src/main:src/tokenization:src/utils:src/lexer:src/expand:src/parenthesis:src/execution
+INCLUDE	=	-I ./ -I ./includes -I ./libft
 
 all: $(NAME)
 
@@ -49,7 +48,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make clean --silent --directory=./libft
+	@make fclean --silent --directory=./libft
 	@echo "\033[31mFull cleaned!\033[0m"
 
 re: fclean all
