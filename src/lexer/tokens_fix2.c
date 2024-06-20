@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 11:36:47 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/09 13:32:08 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:19:41 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void	fix_tokens(t_token **head, t_data *data)
 	find_three_out(head);
 	find_three_in(head);
 	find_asterisk(head, data);
-	print_tokens(data);
 }
 
 void	find_append(t_token *current)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
-	
+
 	tmp = current;
 	if (tmp->type == T_REDIR_OUTPUT && tmp->next->type == T_REDIR_OUTPUT)
 	{

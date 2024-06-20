@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 10:55:18 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/09 13:22:13 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/06/17 15:10:35 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/19 14:44:52 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,7 @@ void	minishell_loop(t_data *data)
 	
 	while (1)
 	{
-		/* 1.Here have to write function to reset */
-		/*2.to avoid segmentation fault. Delete later*/
-		if (data == NULL)
-		{
-			fprintf(stderr, "Error: data is NULL\n");
-			exit(1);
-		}
-		if (data->input_minishell == NULL)
-		{
-			fprintf(stderr, "Error: data->input_minishell is NULL\n");
-			exit(1);
-		}
+		reset_data(data);
 		input = readline(data->input_minishell);
 		if (handle_d(data, input))
 			continue;
@@ -44,7 +33,6 @@ void	minishell_loop(t_data *data)
 			continue;
 		printf("Input proccesed: %s\n", data->input_line); //working trim
 		printf("Input: %s\n", input); //standart trim. I free it already
-		free(input);
 		////////////execute(data);
 	}
 }

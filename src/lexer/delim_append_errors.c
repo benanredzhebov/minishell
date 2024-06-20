@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:51:52 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/11 14:50:14 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 07:52:54 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_first_half_delim(t_token *token)
 				return (printf("minishell: syntax error near %s\n", \
 				"unexpected token `>|'"), 1);
 			if (token->next->next->type != T_NEWLINE
-				&& token->next->next->type != T_SPACE)
+				&& token->next->next->type != T_SPACE && token->next->next->type != T_WORD)
 				return (printf("minishell: syntax error near %s\n", \
 				"unexpected token `>>'"), 1);
 			else
@@ -57,7 +57,7 @@ int	check_second_half_delim(t_token *token)
 int	check_delim(t_token *token)
 {
 	int	result;
-
+	printf("We checking the delim\n");
 	if (token->type == T_DELIM)
 	{
 		result = check_first_half_delim(token);
@@ -80,7 +80,7 @@ int	check_append(t_token *token)
 		if (token->next->type != T_SPACE)
 			if (check_red_general(token))
 				return (1);
-		if (check_red_general(token->next))
+		if (token->next && check_red_general(token->next))
 			return (1);
 	}
 	return (0);

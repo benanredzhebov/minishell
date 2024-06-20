@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:35:23 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/10 11:15:15 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:13:41 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,21 @@ int	set_token_type(t_data *data)
 	data->token_list = head;
 	clean_null_tokens(&data->token_list);
 	fix_tokens(&data->token_list, data);
+	print_tokens(data);
 	if (syntax_errors(data->token_list, data))
 		return (data->exit_status = 258, 1);
+	// if (execute_delim(&data->token_list, data))
+	// 	return (g_child_pid = 0, 1);
+	if (find_parenthesis(data->input_line))
+		update_input_line(data);
+	// if (lexic_with_parenth(data))
+	// {
+	// 	int	i = write(STDERR_FILENO, "\n", 1);
+	// 	return ((void) i, 1);
+	// }
 	clean_space_tokens(&data->token_list);
+	concantenate_word_tokens(&data->token_list);
+	print_tokens(data);
 	return (0);
 }
 

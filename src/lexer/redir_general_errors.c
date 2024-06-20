@@ -6,28 +6,30 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:36:22 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/12 07:38:04 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 08:07:29 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*echo &> '>>>' */
 int	check_first_half_general(t_token *tmp)
 {
 	if (check_numbers(tmp))
 		return (1);
-	if (tmp->next->type == T_THREE_OUT)
+	if (tmp->next->type == T_THREE_OUT) {
 		return (printf("minishell: syntax error near %s\n", \
 		"unexpected token `>>'"), 1);
+	}
 	if (tmp->next->type == T_AMPER && tmp->next->next->type == T_REDIR_OUTPUT)
 		return (printf("minishell: syntax error near %s\n", \
 		"unexpected token `&>'"), 1);
 	if (tmp->next->type == T_APPEND && tmp->next->next->type == T_REDIR_OUTPUT)
 		return (printf("minishell: syntax error near %s\n", \
-		"unexpected token `&>'"), 1);
+		"unexpected token `>>'"), 1);
 	if (tmp->next->type == T_APPEND && tmp->next->next->type == T_REDIR_INPUT)
 		return (printf("minishell: syntax error near %s\n", \
-		"unexpected token `&'"), 1);
+		"unexpected token `>>'"), 1);
 	return (0);
 }
 
@@ -85,6 +87,8 @@ int	check_inout(t_token *token)
 	return (0);
 }
 
+/*detects a syntax error, followed by something that is not
+another word token - like 'echo & 1234 ls'*/
 int	check_numbers(t_token *tmp)
 {
 	if (tmp->next->type == T_SPACE && tmp->next->next->type == T_WORD

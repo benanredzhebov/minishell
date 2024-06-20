@@ -6,7 +6,7 @@
 #    By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/25 15:10:17 by beredzhe          #+#    #+#              #
-#    Updated: 2024/06/05 12:56:48 by beredzhe         ###   ########.fr        #
+#    Updated: 2024/06/19 14:39:11 by beredzhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	=	$(wildcard src/main/*.c) \
 			$(wildcard src/expand/*.c) \
 			$(wildcard src/parenthesis/*.c) \
 			$(wildcard src/execution/*.c) \
+			$(wildcard src/parsing/*.c) \
 			
 
 # Generate object files names

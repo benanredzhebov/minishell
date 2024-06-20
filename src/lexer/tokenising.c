@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:18:57 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/09 11:34:00 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:57:52 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_token	*create_token(t_data *data, int i)
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		exit_shell("Error: Memory allocation failed\n", 1, data);
+		exit_shell("Error: malloc failed\n", 1, data);
 	new->word = ft_substr(data->input_line, i - data->count, data->count);
 	new->type = T_WORD;
 	data->count = 0;

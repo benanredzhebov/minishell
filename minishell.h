@@ -6,13 +6,23 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:54 by oruban            #+#    #+#             */
-/*   Updated: 2024/06/12 07:41:02 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:45:53 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#ifndef SA_RESTART
+# define SA_RESTART 0
+#endif
+
+#ifndef SA_SIGINFO
+# define SA_SIGINFO 0
+#endif
+
+# define _POSIX_C_SOURCE 200809L
+# include <signal.h> // sigaction
 # include "libft/libft.h" // libft
 # include <stdio.h> // perror
 # include <readline/readline.h> // readline
@@ -21,19 +31,46 @@
 # include <unistd.h> // getpwd
 # include <sys/wait.h> // waitpid
 # include <sys/stat.h> // stat
-# include <signal.h> // sigaction
 # include <fcntl.h> // open flags
+# include <string.h>
+# include <termios.h> // POSIX terminal control definitions
+# include <dirent.h> // opening, reading directory
+# include <termcap.h> // terminal handling as terminal clearing
+# include <stdint.h>
+# include <limits.h> //INT_MAX
+# include <errno.h> // defines macros for reporting and retrieving errors
+# include <stdbool.h> // boolean type
+
+typedef struct s_envir 
+{
+	char		*var_name;
+	char		*var_value;
+	int			visible;
+	struct s_envir	*next;
+	struct s_envir	*prev;
+}				t_envir;
+
+typedef struct s_heredoc_file 
+{
+	int						id;
+	char					*filename;
+	struct s_heredoc_file	*next;
+}				t_heredoc_file;
 
 typedef struct s_data
 {
 	struct s_token	*token_list;
 	int				s_quote; /*shell is inside a single quoted string*/
+	t_heredoc_file	*heredoc_file;
+	t_envir			*env_list;
+	t_envir			*sorted_env_list;
 	int				d_quote;
 	long int		exit_status;
+	int				pid;
 	int				forked; /*manage parent and child process behaviors*/
 	int				count; /*count the number of tokens*/
-
 	char			*input_minishell; /*initial input to the shell*/
+	char			*curr_dir;
 	char			**root_directory; /*while be used later for parcing part*/
 	char			*input_line; /*input after being processed*/
 
@@ -67,17 +104,20 @@ typedef struct s_token
 	struct s_token	*prev;
 }				t_token;
 
-typedef struct s_env
+typedef struct s_copy_params
 {
-	char			*var_name;
-	char			*var_value;
-	int				visible;
-	struct s_env	*next;
-	struct s_env	*prev;
-}				t_env;
+	char			**new_input_line;
+	int				*i;
+	int				*j;
+	t_heredoc_file	**current_file;
+}				t_copy_params;
 
 /*Loop into the minishell program*/
 void	minishell_loop(t_data *data);
+char	**create_envp(void);
+
+/*reset.c*/
+void	reset_data(t_data *data);
 
 /*find_token.c*/
 int	find_token(t_data *data, char *str, int *i, t_token **head);
@@ -104,6 +144,7 @@ void	set_token_type2(t_token *token);
 
 /*lexical_analysis2.c*/
 void	tokenise(t_data *data, char *str);
+void	concantenate_word_tokens(t_token **head);
 
 /*tokenising.c*/
 void	print_tokens(t_data *data);
@@ -121,6 +162,10 @@ void	free_2darray(char **array);
 void	init_data(t_data **data, char **envp);
 
 /*signal.c*/
+void	handle_signal(void);
+void	handle_sigint(int signo);
+void	handle_sigtstp_sigquit(int signo);
+void	handle_c(int signo);
 int		handle_d(t_data *data, char *input);
 
 /*free.c*/
@@ -140,7 +185,7 @@ int		in_quotes(char *s, int pos);
 char	*trim_input(char *input);
 void	process_input(char *input, char *str, int *i, int *j);
 int		ft_char_in_string(char c, char *str);
-int	ft_only_digit(char *str);
+int		ft_only_digit(char *str);
 
 /*character_checkers.c*/
 int		special_chars(char *str);
@@ -151,6 +196,15 @@ void	add_token(t_token **head, t_token *new);
 /*quotes_utils.c*/
 int	is_escaped(char *s, int pos);
 
+/*update_input_line.c*/
+void	update_input_line(t_data *data);
+void copy_filename(t_data *data, t_copy_params *params);
+
+/*parenthesis_utils.c*/
+int	find_parenthesis(char *str);
+int	count_parenthesis(char *str, int *parenCount, int *parenth_total);
+int	check_parenthesis(int parenCount, int parenth_total);
+
 /*parenthesis_utils2.c*/
 void	set_token_parenth2(t_token *token);
 
@@ -160,7 +214,7 @@ char	*update_aster_temp(char *temp, char *root_directory_k);
 void	check_matches(t_token *token, char **root_directory);
 
 /*execution_utils.c*/
-int	is_only_asterisks(char *str);
+int		is_only_asterisks(char *str);
 
 /*expand_asterisk.c*/
 void	update_asterisk_token(t_token *token, t_data *data);
@@ -175,11 +229,11 @@ int		syntax_errors(t_token *token, t_data *data);
 int		check_and(t_token *token, char *str);
 
 /*redir_general_errors.c*/
-int	check_inout(t_token *token);
-int	check_numbers(t_token *tmp);
-int	check_red_general(t_token *tmp);
-int	check_first_half_general(t_token *tmp);
-int	check_second_half_general(t_token *tmp);
+int		check_inout(t_token *token);
+int		check_numbers(t_token *tmp);
+int		check_red_general(t_token *tmp);
+int		check_first_half_general(t_token *tmp);
+int		check_second_half_general(t_token *tmp);
 
 /*redin_errors.c*/
 int 	check_red(t_token *token, char *str);
@@ -189,22 +243,35 @@ int		check_redin_second_half(t_token *token);
 int		check_redin_last_part(t_token *token);
 
 /*delim_append_errors.c*/
-int	check_delim(t_token *token);
-int	check_first_half_delim(t_token *token);
-int	check_second_half_delim(t_token *token);
-int	check_append(t_token *token);
+int		check_delim(t_token *token);
+int		check_first_half_delim(t_token *token);
+int		check_second_half_delim(t_token *token);
+int		check_append(t_token *token);
 
 /*token_errors.c*/
-int	check_pipe_or(t_token *tmp);
-int	check_first_half_pipe_or(t_token *tmp);
-int	check_second_half_pipe_or(t_token *tmp);
-int	check_threein(t_token *token);
-int	check_threeout(t_token *token);
+int		check_pipe_or(t_token *tmp);
+int		check_first_half_pipe_or(t_token *tmp);
+int		check_second_half_pipe_or(t_token *tmp);
+int		check_threein(t_token *token);
+int		check_threeout(t_token *token);
 
 /*redout_erros.c*/
-int	check_red_out(t_token *token);
-int	check_first_half_out(t_token *token);
-int	check_second_half_out(t_token *token);
-int	check_last_part_out(t_token *token);
+int		check_red_out(t_token *token);
+int		check_first_half_out(t_token *token);
+int		check_second_half_out(t_token *token);
+int		check_last_part_out(t_token *token);
+
+/*root_directory.c*/
+char	**read_directory(DIR *d, char **root_directory);
+char	**get_root_directory(void);
+void	sort_directory(char **arr);
+int		count_root_directory(void);
+
+/*envir_list.c*/
+void	extract_env_var(t_envir *envir, char *env);
+t_envir	*fill_env(char **env, t_data *data);
+t_envir	*ft_envnew(void);
+
+extern pid_t	g_child_pid; //Store process ID
 
 #endif
