@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:41:24 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/20 12:43:47 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/25 09:13:01 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 /*replacing a '<<' sequence in the 'input_line' with the file name
 from the current 'heredoc_file'.*/
-void copy_filename(t_data *data, t_copy_params *params)
+void	copy_filename(t_data *data, t_copy_params *params)
 {
-	int k = 0;
+	int	k;
 
+	k = 0;
 	*params->i += 2;
-
 	if (data->input_line[*params->i] == ' ')
 		(*params->new_input_line)[(*params->j)++] = \
 		data->input_line[(*params->i)++];
-	while ((*params->current_file)->filename[k]) {
+	while ((*params->current_file)->filename[k])
+	{
 		(*params->new_input_line)[(*params->j)++] = \
 		(*params->current_file)->filename[k++];
 	}

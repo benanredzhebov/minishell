@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:53:30 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/19 14:21:35 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/25 10:57:17 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static unsigned int	find_equal_sign(char *str)
 {
 	unsigned int	i;
-	
+
 	i = 0;
 	while (str[i] != '=')
 		i++;
@@ -59,20 +59,5 @@ t_envir	*fill_env(char **env, t_data *data)
 		}
 	}
 	data->env_list = head;
-	return (head);
-}
-
-t_envir	*ft_envnew(void)
-{
-	t_envir	*head;
-	
-	head = malloc(sizeof(t_envir));
-	if (!head)
-		return (NULL);
-	head->var_name = NULL;
-	head->var_value = NULL;
-	head->visible = 0;
-	head->next = NULL;
-	head->prev = NULL;
 	return (head);
 }

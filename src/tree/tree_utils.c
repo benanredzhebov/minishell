@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   tree_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 09:40:51 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/25 10:28:50 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/06/24 09:12:37 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/24 09:15:48 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dest, const char *src)
+t_tree	*init_tree_root(void)
 {
-	char	*original_dest;
+	t_tree	*tree;
 
-	original_dest = dest;
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (original_dest);
+	tree = malloc(sizeof(t_tree));
+	if (!tree)
+		return (NULL);
+	tree->type = 0;
+	tree->value = NULL;
+	tree->args_array = NULL;
+	tree->left = NULL;
+	tree->right = NULL;
+	return (tree);
 }

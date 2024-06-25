@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   envirlists_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 09:40:51 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/25 10:28:50 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/06/25 10:54:35 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/25 11:49:02 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dest, const char *src)
+t_envir	*ft_envnew(void)
 {
-	char	*original_dest;
+	t_envir	*head;
 
-	original_dest = dest;
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (original_dest);
+	head = malloc(sizeof(t_envir));
+	if (!head)
+		return (NULL);
+	head->var_name = NULL;
+	head->var_value = NULL;
+	head->visible = 0;
+	head->next = NULL;
+	head->prev = NULL;
+	return (head);
 }

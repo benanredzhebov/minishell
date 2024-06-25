@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   envirlists_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 09:40:51 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/25 10:28:50 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/06/24 21:08:15 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/24 21:11:10 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strcat(char *dest, const char *src)
+void	ft_envclear(t_envir **lst)
 {
-	char	*original_dest;
+	t_envir	*next;
 
-	original_dest = dest;
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (original_dest);
+	if (!lst || !*lst)
+		return ;
+	while (*lst)
+	{
+		next = (*lst)->next;
+		ft_envdelone(*lst, free);
+		*lst = next;
+	}
+}
+
+void	ft_envdelone(t_envir *lst, void (*del))
+{
+	if (!lst || !del)
+		return ;
+	if (lst->var_name)
+		free(lst->var_name);
+	if (lst->var_value)
+		free(lst->var_value);
+	free(lst);
 }

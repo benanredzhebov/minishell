@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 13:28:39 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/29 14:46:24 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:45:44 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,26 @@ int	is_escaped(char *s, int pos)
 		pos--;
 	}
 	return (n % 2);
+}
+
+int	has_quotes(char *str)
+{
+	while (*str)
+	{
+		if (*str == '\"' || *str == '\'')
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+int	has_dollar(char *str)
+{
+	while (*str)
+	{
+		if (*str == '$')
+			return (1);
+		str++;
+	}
+	return (0);
 }

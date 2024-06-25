@@ -6,44 +6,35 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:03:39 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/20 09:20:55 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/21 07:41:37 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_red(t_token *token, char *str)
+int	check_red(t_token *token, char *str)
 {
 	if (!ft_strcmp(str, ">>>"))
 		if (check_threeout(token))
 			return (1);
-	if (!ft_strcmp(str, "<<<")) 
+	if (!ft_strcmp(str, "<<<"))
 		if (check_threein(token))
 			return (1);
-	if (!ft_strcmp(str, "<<")){
-		if (check_delim(token)){
-			printf("Check delim\n");
+	if (!ft_strcmp(str, "<<"))
+		if (check_delim(token))
 			return (1);
-		}
-	}
-	if (!ft_strcmp(str,">>"))
+	if (!ft_strcmp(str, ">>"))
 		if (check_append(token))
 			return (1);
-	if (!ft_strcmp(str, "<")){
-		if (check_red_in(token)){
-			printf("Check red_in\n");
+	if (!ft_strcmp(str, "<"))
+		if (check_red_in(token))
 			return (1);
-		}
-	}
 	if (!ft_strcmp(str, ">"))
 		if (check_red_out(token))
 			return (1);
-	if (!ft_strcmp(str, "<>")){
-		if (check_inout(token)){
-			printf("Check red_out\n");
+	if (!ft_strcmp(str, "<>"))
+		if (check_inout(token))
 			return (1);
-		}
-	}
 	return (0);
 }
 
@@ -51,18 +42,14 @@ int	check_redin_first_half(t_token *token)
 {
 	if (token->next->type == T_IN_OUT)
 	{
-		printf("Debug: Entered in first half\n");
 		if (token->next->next->type == T_PIPE
-			|| token->next->next->type == T_OR){
-				printf("Debug: Type: %d, String: %s\n", token->type, token->word);
-				return (printf("minishell: syntax error near %s\n", \
-			"unexpected token `<|'"), 1);
-			}
-			
+			|| token->next->next->type == T_OR)
+			return (printf("minishell: syntax error near %s\n", \
+			"unexpected token `>|'"), 1);
 		if (token->next->next->type == T_AND
 			|| token->next->next->type == T_AMPER)
 			return (printf("minishell: syntax error near %s\n", \
-			"unexpected token `<&'"), 1);
+			"unexpected token `>&'"), 1);
 		if (token->next->next->type == T_REDIR_OUTPUT
 			|| token->next->next->type == T_APPEND
 			|| token->next->next->type == T_THREE_OUT)
@@ -77,7 +64,6 @@ int	check_redin_first_half(t_token *token)
 
 int	check_redin_second_half(t_token *token)
 {
-	printf("Debug: Entered in second half\n");
 	if (token->next->type == T_AND)
 	{
 		if (token->next->next->type == T_AMPER
@@ -90,14 +76,13 @@ int	check_redin_second_half(t_token *token)
 		if (token->next->next->type != T_AMPER
 			|| token->next->next->type == T_AND)
 			return (printf("minishell: syntax error near %s\n", \
-			"unexpected token `&&'"), 1);
+			"unexpected token `&'"), 1);
 	}
 	return (0);
 }
 
 int	check_redin_last_part(t_token *token)
 {
-	printf("Debug: Entered in last part\n");
 	if (token->next->type == T_AMPER && token->next->next->type == T_SPACE
 		&& token->next->next->next->type == T_WORD
 		&& !ft_only_digit(token->next->next->next->word))

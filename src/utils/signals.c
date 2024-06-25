@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:46:20 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/17 14:40:06 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:00:07 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	handle_sigint(int signo)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			int i = write(1, "\n", 1);
-			(void) i;
 			if (g_child_pid == 42)
 				g_child_pid = 44;
 			if (g_child_pid != 0 && g_child_pid != 44)
@@ -75,6 +73,7 @@ void	handle_c(int signo)
 	handle_sigint(signo);
 	handle_sigtstp_sigquit(signo);
 }
+
 /*In summary, handle_d handles two special cases: 
 when input is NULL and when input is an empty string. 
 In the first case, it exits the shell. In the second case, 

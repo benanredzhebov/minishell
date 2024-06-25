@@ -6,7 +6,7 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:14:28 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/20 13:33:52 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/25 09:14:14 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ t_token	*last_token(t_token *lst)
 	}
 	return (node);
 }
-

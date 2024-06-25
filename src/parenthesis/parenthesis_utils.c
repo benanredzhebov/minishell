@@ -6,12 +6,56 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:32:56 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/20 10:39:10 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:09:54 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	only_parenth(char *str)
+{
+	int	count;
+	int	flag;
+
+	count = 0;
+	flag = 0;
+	if (only_spaces_parenth(str))
+		flag = 1;
+	while (*str)
+	{
+		if (*str == '(')
+			count++;
+		str++;
+	}
+	if (count == 1)
+		return (0);
+	else if (flag == 1)
+		return (count);
+	else
+		return (0);
+}
+
+int	operand_error_parenth(int i)
+{
+	int	j;
+	int	z;
+
+	i -= 2;
+	j = i;
+	z = i;
+	printf("minishell: ((: ");
+	while (i-- >= 0)
+		printf("%c", '(');
+	while (z-- >= 0)
+		printf("%c", ')');
+	printf(": syntax error: operand expected (error token is \"");
+	while (j-- >= 0)
+		printf("%c", ')');
+	printf("\")\n");
+	return (1);
+}
+
+/*checks if parenthesis are balanced*/
 int	count_parenthesis(char *str, int *parenCount, int *parenth_total)
 {
 	int	i;

@@ -6,16 +6,36 @@
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:30:58 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/06/20 13:54:49 by beredzhe         ###   ########.fr       */
+/*   Updated: 2024/06/24 21:39:10 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int has_unclosed_quotes(char *str)
+void	find_quotes(char **str, t_data *data)
 {
-	char last_opened;
-	
+	char	*temp;
+
+	temp = NULL;
+	while (*str)
+	{
+		if (has_quotes(*str) || has_dollar(*str))
+		{
+			temp = expand_quotes(data, *str);
+			if (!temp)
+				return ;
+			ft_memdel(&(*str));
+			*str = ft_strdup(temp);
+			ft_memdel(&temp);
+		}
+		str++;
+	}
+}
+
+int	has_unclosed_quotes(char *str)
+{
+	char	last_opened;
+
 	last_opened = 0;
 	while (*str)
 	{
@@ -31,9 +51,9 @@ int has_unclosed_quotes(char *str)
 	if (last_opened != 0)
 	{
 		ft_putstr_fd("Close the quote!\n", STDERR_FILENO);
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 /*Check_d_quote is used to find a closing double quote

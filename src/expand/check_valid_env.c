@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_tree.c                                       :+:      :+:    :+:   */
+/*   check_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 11:26:05 by beredzhe          #+#    #+#             */
-/*   Updated: 2024/05/23 11:57:52 by beredzhe         ###   ########.fr       */
+/*   Created: 2024/06/24 11:49:39 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/24 12:42:52 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data *init_temp_data(void)
+int	is_valid_env_char(char c)
 {
-	t_data *temp_data;
-
-	temp_data = malloc(sizeof(t_data));
-	temp_data->input_minishell = NULL;
-	return (temp_data);
+	return (ft_isalnum(c) || c == ' ');
 }

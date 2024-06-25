@@ -6,7 +6,7 @@
 #    By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 08:50:20 by beredzhe          #+#    #+#              #
-#    Updated: 2024/06/18 09:48:23 by beredzhe         ###   ########.fr        #
+#    Updated: 2024/06/21 11:00:09 by beredzhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC =		ft_isalpha.c \
 			ft_strcmp.c \
 			ft_strcat.c \
 			ft_strcpy.c \
+			ft_strjoin_double_free.c \
 
 BONUS	=	ft_lstnew.c \
 			ft_lstadd_front.c \
