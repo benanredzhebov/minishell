@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:17:55 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/13 16:17:55 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/15 10:24:04 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/15 10:27:49 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// isdigit()  #include <ctype.h>
-// checks for a digit (0 through 9).
-// RETURN VALUE The values returned are nonzero if the character c falls 
-// into the tested class, and zero if not.
-
-// return ((c >= '0' && c <= '9') ? 1 : 0);
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {
@@ -23,3 +18,23 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
+// int main()
+// {
+//     char c;
+//     char result;
+
+//     c = '7';
+//     result = ft_isdigit(c);
+//     printf("The result is %d\n", result);
+
+//     c = 'g';
+//     result = ft_isdigit(c);
+//     printf("The result is %d\n", result);
+
+//     c = '+';
+//     result = ft_isdigit(c);
+//     printf("The result is %d\n", result);
+
+//     return (0);
+// }

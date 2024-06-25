@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 15:29:53 by oruban            #+#    #+#             */
-/*   Updated: 2024/05/15 17:33:17 by oruban           ###   ########.fr       */
+/*   Created: 2024/06/04 10:57:41 by beredzhe          #+#    #+#             */
+/*   Updated: 2024/06/09 13:45:27 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	is_only_asterisks(char *str)
 {
-	if (argv && argc != 1)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		ft_printf("Usage: minishell\n", 2);
-		return (EXIT_FAILURE);
+		if (str[i++] != '*')
+			return (0);
 	}
-	return(minishell(ini_minienv(envp)));
-
-}
-
-int minishell(t_env *minienv)
-{
-	int exit_status;
-	
-	exit_status = EXIT_SUCCESS;
-	return (exit_status);
+	return (1);
 }

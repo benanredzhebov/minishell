@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oruban <oruban@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beredzhe <beredzhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:16:33 by oruban            #+#    #+#             */
-/*   Updated: 2023/11/13 16:16:33 by oruban           ###   ########.fr       */
+/*   Created: 2023/11/15 10:13:26 by beredzhe          #+#    #+#             */
+/*   Updated: 2023/11/15 10:22:22 by beredzhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <ctype.h>
-// isascii()
-// checks whether c is a 7-bit unsigned char value that fits into the ASCII 
-// character set.
-// RETURN VALUE The values returned are nonzero if the character c falls 
-// into the tested class, and zero if not.
-
-// return ((c >= 0 && c <= 127) ? 1 : 0);
+#include "libft.h"
 
 int	ft_isascii(int c)
 {
@@ -25,3 +18,23 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
+
+// int main()
+// {
+//     char c;
+//     char result;
+
+//     c = '7';
+//     result = ft_isascii(c);
+//     printf("The result is %d\n", result);
+
+//     c = 'g';
+//     result = ft_isascii(c);
+//     printf("The result is %d\n", result);
+
+//     c = 128;
+//     result = ft_isascii(c);
+//     printf("The result is %d\n", result);
+
+//     return (0);
+// }
